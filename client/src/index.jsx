@@ -15,7 +15,7 @@ class App extends React.Component {
 
   componentDidMount() {
     $.ajax({
-      url: 'http://localhost:1128/repos',
+      url: `${HEROKU-URL}/repos`,
       method: 'GET',
       success: data => { this.setState({repos: data}); },
       error: () => console.log('GET error!')
@@ -24,7 +24,7 @@ class App extends React.Component {
 
   search (term) {
     $.ajax({
-      url: 'http://localhost:1128/repos',
+      url: `${HEROKU-URL}/repos`,
       method: 'POST',
       contentType: 'text/plain',
       data: term,
