@@ -24,7 +24,7 @@ let save = repo => {
     stargazers_count: repo.stargazers_count,
     forks_count: repo.forks_count
   })
-  // doc.save(err => { if (err) return console.log(err) });
+  doc.save(err => { if (err) return console.log(err) });
 }
 
 let fetch = callback => {
