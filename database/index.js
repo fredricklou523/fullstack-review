@@ -29,7 +29,6 @@ let save = repo => {
 
 let fetch = callback => {
   let cb = (err, repos) => { callback(repos) };
-  // Repo.remove({ owner_login: 'zhujohnny'}, cb);
   Repo.find(cb).sort('-stargazers_count').limit(25);
 }
 
