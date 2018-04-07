@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/fetcher');
 
 let repoSchema = mongoose.Schema({
-  repo_id: Number,
+  _id: Number,
   name: String,
   owner_login: String,
   html_url: String,
@@ -16,7 +16,7 @@ let Repo = mongoose.model('Repo', repoSchema);
 
 let save = repo => {
   var doc = new Repo({
-    repo_id: repo.id,
+    _id: repo.id,
     name: repo.name,
     owner_login: repo.owner.login,
     html_url: repo.html_url,
@@ -28,8 +28,9 @@ let save = repo => {
 }
 
 let fetch = callback => {
-  let cb = (err, repos) => { callback(repos) }; 
-  Repo.find({ owner_login: 'zhujohnny' }, cb);
+  let cb = (err, repos) => { callback(repos) };
+  // Repo.remove({ owner_login: 'zhujohnny'}, cb);
+  Repo.find(cb).sort('-stargazers_count').limit(25);
 }
 
 module.exports.save = save;
