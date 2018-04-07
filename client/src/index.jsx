@@ -5,12 +5,12 @@ import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
 
 class App extends React.Component {
+  
   constructor(props) {
     super(props);
     this.state = { 
       repos: []
     }
-
   }
 
   search (term) {
@@ -19,8 +19,17 @@ class App extends React.Component {
       method: 'POST',
       contentType: 'text/plain',
       data: term,
-      success: () => console.log(`${term} was searched`),
-      error: () => console.log('POST failed!')
+      success: () => { this.fetch() },
+      error: () => console.log('POST error!')
+    });
+  }
+
+  fetch() {
+    $.ajax({
+      url: 'http://localhost:1128/repos',
+      method: 'GET',
+      success: data => { this.setState({repos: data}); },
+      error: () => console.log('GET error!')
     });
   }
 

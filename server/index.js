@@ -8,26 +8,18 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 app.use(parse.text());
 
-app.post('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
-	
-	console.log(req.method, req.body);
-	
+app.post('/repos', function (req, res) {	
+	// console.log(req.method, req.body);
 	let saveRepos = repos => repos.forEach(db.save);
 	github.getReposByUsername(req.body, saveRepos);
-  res.writeHead(200);
-  res.end();
+  res.status(200).send('repos posted!');
 });
 
 app.get('/repos', function (req, res) {
   // TODO - your code here!a
   // This route should send back the top 25 repos
-  db.fetch();
-  res.writeHead(200);
-  res.end();
+ 	res.status(200);
+  db.fetch(res.send.bind(res));
 });
 
 let port = 1128;

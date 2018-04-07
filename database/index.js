@@ -24,13 +24,12 @@ let save = repo => {
     stargazers_count: repo.stargazers_count,
     forks_count: repo.forks_count
   })
-  doc.save(err => { if (err) return console.log(err) });
-  // console.log(Repo.schema.obj);
+  // doc.save(err => { if (err) return console.log(err) });
 }
 
-let fetch = () => {
-  console.log('fetching!');
-  Repo.find({ name: 'zhujohnny', function (err, repo) { console.log('hello'); } });
+let fetch = callback => {
+  let cb = (err, repos) => { callback(repos) }; 
+  Repo.find({ owner_login: 'zhujohnny' }, cb);
 }
 
 module.exports.save = save;
