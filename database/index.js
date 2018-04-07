@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher');
+mongoose.connect(`mongodb://${DBUSER}:${DBPASSWORD}@ds237989.mlab.com:37989/heroku_sd7kps2x`);
 
 let repoSchema = mongoose.Schema({
   _id: Number,
